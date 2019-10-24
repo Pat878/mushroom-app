@@ -1,0 +1,7 @@
+venv/
+staticfiles/
+.DS_Store
+*.log
+*.pot
+*.pyc
+__pycache__/
