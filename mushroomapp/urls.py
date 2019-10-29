@@ -1,10 +1,11 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from . import form
+from .mushroom_form import form
 
-from . import views
+
+# from . import views
 
 urlpatterns = [
-    path('', form.form, name='form'),
-    path('form/', form.form, name='form'),
+    path('', form, name='form'),
+    path('form/', form, name='form'),
 ]
