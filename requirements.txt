@@ -2,3 +2,4 @@ scikit-learn==0.20
 numpy
 pandas
 python-dotenv
+django-crispy-forms

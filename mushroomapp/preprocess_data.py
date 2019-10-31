@@ -17,5 +17,3 @@ class PreprocessData:
         mushroom_features = one_hot.fit_transform(arg).toarray()
         mushroom_features_df = pd.DataFrame(mushroom_features)
         return mushroom_features_df
-
-# 'cap-surface' 'cap-color' 'bruises'	'odor'	'gill-attachment'	'gill-spacing'	'gill-size'	'gill-color'	...	'stalk-surface-below-ring'	'stalk-color-above-ring'	'stalk-color-below-ring'	'veil-type'	'veil-color'	'ring-number'	'ring-type'	'spore-print-color'	'population'	'habitat'
