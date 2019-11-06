@@ -40,9 +40,9 @@ class MushroomForm(forms.Form):
     stalkroot = forms.ChoiceField(label='Stalk Root', choices=[('b', 'bulbous'), ('c', 'club'), ('u', 'cup'),
                                                                ('e', 'equal'), ('z', 'rhizomorphs'), ('r', 'rooted'), ('?', 'missing')])
     stalksurfaceabovering = forms.ChoiceField(label='Stalk Surface Above Ring', choices=[('f', 'fibrous'),
-                                                                                   ('y', 'scaly'), ('k', 'silky'), ('s', 'smooth')])
+                                                                                         ('y', 'scaly'), ('k', 'silky'), ('s', 'smooth')])
     stalksurfacebelowring = forms.ChoiceField(label='Stalk Surface Below Ring', choices=[('f', 'fibrous'),
-                                                                                   ('y', 'scaly'), ('k', 'silky'), ('s', 'smooth')])
+                                                                                         ('y', 'scaly'), ('k', 'silky'), ('s', 'smooth')])
 
     stalkcolorabovering = forms.ChoiceField(label='Stalk Color Above Ring', choices=[('n', 'brown'), ('b', 'buff'),
                                                                                      ('c', 'cinnamon'), ('g', 'gray'), ('o', 'orange'), ('p', 'pink'), ('e', 'red'), ('w', 'white'), ('y', 'yellow')])
@@ -71,8 +71,8 @@ def form(request):
         if form.is_valid():
             cd = form.cleaned_data
             preprocess = PreprocessData(cd)
-            df = preprocess.create_preprocessed_dataframe()
-            req = RequestPrediction(df)
+            preprocessed_values = preprocess.create_preprocessed_values()
+            req = RequestPrediction(preprocessed_values)
             prediction = req.submit_dataframe()
 
             messages.add_message(request, messages.INFO, str(prediction))
