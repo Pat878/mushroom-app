@@ -10,15 +10,7 @@ class RequestPrediction:
 
     def submit_dataframe(self):
         URL = os.getenv("API_LINK")
-        # test = [0., 0., 1., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0.,
-        #        0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 1., 0.,
-        #        1., 1., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.,
-        #        0., 0., 0., 1., 0., 0., 0., 1., 0., 1., 0., 0., 0., 0., 0., 0., 0.,
-        #        0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 1., 0., 0.,
-        #        1., 0., 0., 1., 0., 1., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0.,
-        #        0., 0., 0., 0., 0., 1., 0., 0., 0., 1., 0., 0., 0., 0., 0.]
-        #PARAMS = np.array(test).astype(int).tolist()
-        PARAMS = np.array(self.data.astype(int).values[0]).astype(int).tolist()
+        PARAMS = self.data
 
         r = requests.post(url=URL, json=PARAMS)
         response = ast.literal_eval(
