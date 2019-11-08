@@ -8,6 +8,7 @@ class PreprocessData:
         self.data = data
 
     def create_preprocessed_values(self):
+        # Calling get_feature_names() on the OneHotEncoder returns the following names
         cols = ['x0_b', 'x0_c', 'x0_f', 'x0_k', 'x0_s', 'x0_x', 'x1_f', 'x1_g',
                 'x1_s', 'x1_y', 'x2_b', 'x2_c', 'x2_e', 'x2_g', 'x2_n', 'x2_p',
                 'x2_r', 'x2_u', 'x2_w', 'x2_y', 'x3_f', 'x3_t', 'x4_a', 'x4_c',
@@ -25,6 +26,7 @@ class PreprocessData:
                 'x20_a', 'x20_c', 'x20_n', 'x20_s', 'x20_v', 'x20_y', 'x21_d',
                 'x21_g', 'x21_l', 'x21_m', 'x21_p', 'x21_u', 'x21_w']
 
+        # Populate the DataFrame with a one hot value of 0 as the default value
         default_data = [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                         0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
@@ -35,14 +37,19 @@ class PreprocessData:
 
         df = pd.DataFrame(np.array(default_data).reshape(1, -1), columns=cols)
 
+        # Take the submitted data from the form (which is accessible as a dictionary)
+        # and create a list in the order that matches the original dataset order
         form_list = list([self.data['capshape'], self.data['capsurface'], self.data['capcolor'], self.data['bruises'], self.data['odor'], self.data['gillattachment'],
                           self.data['gillspacing'], self.data['gillsize'], self.data['gillcolor'], self.data['stalkshape'],
                           self.data['stalkroot'], self.data['stalksurfaceabovering'], self.data['stalksurfacebelowring'], self.data[
             'stalkcolorabovering'], self.data['stalkcolorbelowring'], self.data['veiltype'], self.data['veilcolor'], self.data['ringnumber'],
             self.data['ringtype'], self.data['sporeprintcolor'], self.data['population'], self.data['habitat']])
 
-        for i, feature in enumerate(form_list):
-            col_name = 'x' + str(i) + '_' + feature
+        # Loop through form_list and check if the submitted value
+        # matches one of the one hot encoded columns
+        # Add a 1 when the submitted value matches the encoded column
+        for i, feature_value in enumerate(form_list):
+            col_name = 'x' + str(i) + '_' + feature_value
 
             if col_name in df.columns:
                 df[col_name] = 1.
